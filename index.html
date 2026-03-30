@@ -47,9 +47,10 @@
   "creator": { "@type": "SoftwareApplication", "name": "Perplexity Computer", "url": "https://www.perplexity.ai/computer" }
 }
 </script>
-<!-- Calendly inline widget begin -->
+<!-- Calendly widget begin -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-<!-- Calendly inline widget end -->
+<!-- Calendly widget end -->
 </head>
 
 <body>
@@ -608,10 +609,6 @@
 
     </div>
 
-    <!-- Calendly Inline Widget -->
-    <div class="included__booking reveal reveal-delay-4" style="margin-top: var(--space-12);">
-      <div class="calendly-inline-widget" data-url="https://calendly.com/beau-skalehub" style="min-width:320px;height:700px;"></div>
-    </div>
 
   </div>
 </section>
@@ -805,6 +802,19 @@
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   els.forEach(el => observer.observe(el));
+})();
+
+// Calendly Popup Trigger
+(function(){
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('a[href="#book-call"], .btn--primary, .nav__actions .btn');
+    if (btn && btn.textContent.toLowerCase().includes('book')) {
+      e.preventDefault();
+      if (window.Calendly) {
+        Calendly.initPopupWidget({ url: 'https://calendly.com/beau-skalehub' });
+      }
+    }
+  });
 })();
 
 // FAQ accordion
